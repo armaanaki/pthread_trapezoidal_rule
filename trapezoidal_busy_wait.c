@@ -4,8 +4,9 @@
 
 long thread_count;
 volatile int flag;
+volatile double sum;
 
-void* trapezoidal_rule;
+void* trapezoidal_rule(void* rank);
 
 void usage(char* prog_name);
 void get_args(int argc, char* argv[]);
@@ -40,7 +41,12 @@ int main(int argc, char* argv[]) {
  */
 void* trapezoidal_rule(void* rank) {
     long my_rank = (long) rank;
+    double local_sum;
+
+    /* CODE FOR TRAPEZOIDAL RULE GOES HERE*/
+
     while (flag != my_rank);
+    sum += local_sum;
     flag = (flag+1) % thread_count;
     return NULL;
 }

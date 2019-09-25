@@ -4,8 +4,9 @@
 
 long thread_count;
 pthread_mutex_t mutex;
+volatile double sum;
 
-void* trapezoidal_rule;
+void* trapezoidal_rule(void* rank);
 
 void usage(char* prog_name);
 void get_args(int argc, char* argv[]);
@@ -42,7 +43,12 @@ int main(int argc, char* argv[]) {
  * Global out: 
  */
 void* trapezoidal_rule(void* rank) {
+    double local_sum;
+
+    /* CODE FOR TRAPEZOIDAL RULE GOES HERE*/
+
     pthread_mutex_lock(&mutex);
+    sum += local_sum;
     pthread_mutex_unlock(&mutex);
     return NULL;
 }

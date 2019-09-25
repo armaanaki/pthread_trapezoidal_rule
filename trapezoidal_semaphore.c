@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <semaphore.h>
 
 long thread_count;
-volatile int flag;
+volatile double sum;
+sem_t semaphore;
 
-void* trapezoidal_rule;
+void* trapezoidal_rule(void* rank);
 
 void usage(char* prog_name);
 void get_args(int argc, char* argv[]);
@@ -40,7 +42,13 @@ int main(int argc, char* argv[]) {
  * Global out: 
  */
 void* trapezoidal_rule(void* rank) {
-    long my_rank = (long) rank;
+    double local_sum;
+
+    /* CODE FOR TRAPEZOIDAL RULE GOES HERE*/
+
+    sem_wait(&semaphore);
+    sum += local_sum;
+    sem_post(&semaphore);
     return NULL;
 }
 
